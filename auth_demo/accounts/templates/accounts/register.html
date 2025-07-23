@@ -5,3 +5,18 @@
   <button type="submit">Register</button>
 </form>
 <a href="{% url 'login' %}">Login</a>
+
+{% extends 'app.html' %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+  <h2 class="mb-4">Register</h2>
+  <form method="post" class="card p-4 shadow-sm">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary mt-2">Register</button>
+  </form>
+  <p class="mt-3">Already have an account? <a href="{% url 'login' %}">Login here</a>.</p>
+{% endblock %}
+
