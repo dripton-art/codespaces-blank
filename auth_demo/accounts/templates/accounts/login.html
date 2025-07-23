@@ -1,3 +1,5 @@
+{% extends 'app.html' %}
+
 <h2>Login</h2>
 <form method="post">
   {% csrf_token %}
@@ -6,7 +8,6 @@
 </form>
 <a href="{% url 'register' %}">Register</a>
 
-{% extends 'app.html' %}
 
 {% block title %}Login{% endblock %}
 
