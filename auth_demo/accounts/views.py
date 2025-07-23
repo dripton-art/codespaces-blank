@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout
+from django.contrib.auth.views import LogoutView
 
 # Create your views here.
 
@@ -18,15 +19,7 @@ def register(request):
             user = form.save()
             login(request,user)
             return 'success'
-        else:
-           form = UserCreationForm()
         return render(request, 'accounts/register.html', {'form': form})
-
-def login_view(request):
-    pass
-
-def logout_view(request):
-    pass
 
 
 # Secret Page (only for logged-in users)
@@ -40,3 +33,7 @@ def secret_page(request):
         return HttpResponse(f"Thanks for your answers, {request.user.username}! 👍")
 
      return render(request, 'accounts/secret.html')
+
+class CustomLogoutView(LogoutView):
+    def get(self, request, *args, **kwargs):
+        return self.post(request, *args, **kwargs)
